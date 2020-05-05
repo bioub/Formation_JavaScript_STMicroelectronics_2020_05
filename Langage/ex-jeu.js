@@ -80,3 +80,8 @@ game.loop();
 // new Jeu({ min: 50 }); // entre 50 et 100 (max défaut 100)
 // new Jeu({ max: 50 }); // entre 0 et 50 (min défaut 0)
 // new Jeu({ min: 10, max: 20 }); // entre 0 et 20
+
+// Devoirs :
+// - cet exercice
+// - regarder la vidéo (au moins les 20 premières minutes)
+// In the loop https://www.youtube.com/watch?v=cCOL7MC4Pl0
