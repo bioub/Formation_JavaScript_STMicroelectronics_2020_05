@@ -1,9 +1,6 @@
 const readline = require('readline');
 
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout,
-});
+
 
 // Enoncé slide 68
 function genererAlea(min, max) {
@@ -21,9 +18,6 @@ function dejaJoues(essais) {
 
   console.log('Vous avez déjà joué : ' + essais.join(' | '));
 }
-
-const entierAlea = genererAlea(0, 100);
-const essais = [];
 
 function loop() {
   dejaJoues(essais);
@@ -51,4 +45,38 @@ function loop() {
     }
   });
 }
-loop();
+
+
+// const rl = readline.createInterface({
+//   input: process.stdin,
+//   output: process.stdout
+// });
+// const entierAlea = genererAlea(0, 100);
+// const essais = [];
+// loop();
+
+// Exercice : Adapter le code précédent
+// avec une fonction constructeur (exemple contact)
+function Jeu(options) {
+  // options.min et options.max pour récupérer vos valeurs
+  // définir ici 3 propriétés : 
+  // rl, entierAlea, essais
+}
+
+Jeu.prototype.loop = function() {
+  // adapter la fonction loop
+  // pour quelle retrouve les valeurs de rl, entierAlea, essais
+  // dans l'objet, ex: this.essais
+}
+
+const game = new Jeu({
+  max: 10,
+});
+game.loop();
+
+// il faut que toutes ces versions fonctionnent
+// new Jeu(); (min et max defaut 0 et 100)
+// new Jeu({}); (min et max defaut 0 et 100)
+// new Jeu({ min: 50 }); // entre 50 et 100 (max défaut 100)
+// new Jeu({ max: 50 }); // entre 0 et 50 (min défaut 0)
+// new Jeu({ min: 10, max: 20 }); // entre 0 et 20
