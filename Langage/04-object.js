@@ -81,7 +81,6 @@ function Contact(firstName) {
 // Défini ici, la fonction n'est pas dupliquée
 // Utiliser le prototype
 // Ex: String.prototype.charCodeAt()
-
 Contact.prototype.hello = function() { // ! à ne pas utiliser les => ici
   console.log('Hello my name is ' + this._firstName);
 };
@@ -92,6 +91,13 @@ console.log(typeof contact1); // object
 // console.log(contact1._firstName); // Romain
 // contact1._firstName = 'Toto';
 // console.log(contact1._firstName); // Toto
+
+// Quand on écrit contact1.hello();
+// - JS recherche la clé hello dans l'object contact1 (et ne trouve la trouve)
+// - si elle n'existe pas dans l'object, JS recherche dans Contact.prototype
+// - si elle n'existe dans Contact.prototype, recherche dans Object.prototype (simule l'héritage)
+// (comme en Java tous les objets héritent de Object)
+// - si elle n'existe dans Object.prototype => undefined (TypeError hello is not a function)
 contact1.hello();
 
 
