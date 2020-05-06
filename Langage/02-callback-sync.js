@@ -28,9 +28,14 @@ essais.forEach((nb) => {
 // Programmation fonctionnelle
 // Algo : boucler sur le carré de tous les nombres pairs
 console.time('algo');
-essais.filter((nb) => nb % 2 === 0)
-      .map((nb) => nb ** 2)
-      .forEach((nb) => console.log(nb));
+essais
+  .filter((nb) => nb % 2 === 0)
+  .map((nb) => nb ** 2)
+  .forEach((nb) => console.log(nb));
+
+const essaisFiltres = essais.filter((nb) => nb % 2 === 0);
+const essaisTransformes = essaisFiltres.map((nb) => nb ** 2);
+essaisTransformes.forEach((nb) => console.log(nb));
 console.timeEnd('algo');
 
 console.log('FIN');

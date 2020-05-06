@@ -4,6 +4,7 @@ setTimeout(() => console.log('C'), 1000);
 setTimeout(() => console.log('D'), 500);
 
 console.log('E');
+console.log('F');
 
 // pile d'appel
 // ^

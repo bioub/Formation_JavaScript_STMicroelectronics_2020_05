@@ -1,7 +1,5 @@
 const readline = require('readline');
 
-
-
 // Enoncé slide 68
 function genererAlea(min, max) {
   min = Math.ceil(min);
@@ -19,32 +17,6 @@ function dejaJoues(essais) {
   console.log('Vous avez déjà joué : ' + essais.join(' | '));
 }
 
-function loop() {
-  dejaJoues(essais);
-  rl.question('Quel est le nombre ? ', (saisie) => {
-    const entierSaisi = parseInt(saisie);
-
-    if (isNaN(entierSaisi)) {
-      console.error('Erreur : Il faut saisir un nombre');
-      return loop();
-    }
-
-    console.log('Vous avez saisi ' + entierSaisi);
-
-    essais.push(entierSaisi)
-  
-    if (entierSaisi < entierAlea) {
-      console.log('Trop petit');
-      loop();
-    } else if (entierSaisi > entierAlea) {
-      console.log('Trop grand');
-      loop();
-    } else {
-      console.log('Gagné');
-      rl.close();
-    }
-  });
-}
 
 
 // const rl = readline.createInterface({
@@ -58,19 +30,47 @@ function loop() {
 // Exercice : Adapter le code précédent
 // avec une fonction constructeur (exemple contact)
 function Jeu(options) {
-  // options.min et options.max pour récupérer vos valeurs
-  // définir ici 3 propriétés : 
-  // rl, entierAlea, essais
+  options = options || {};
+  const min = options.min || 0;
+  const max = options.max !== undefined ? options.max : 100;
+
+  this._rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout,
+  });
+  this.entierAlea = genererAlea(min, max);
+  this.essais = [];
 }
 
-Jeu.prototype.loop = function() {
-  // adapter la fonction loop
-  // pour quelle retrouve les valeurs de rl, entierAlea, essais
-  // dans l'objet, ex: this.essais
-}
+Jeu.prototype.loop = function () {
+  dejaJoues(this.essais);
+  this._rl.question('Quel est le nombre ? ', (saisie) => {
+    const entierSaisi = parseInt(saisie);
+
+    if (isNaN(entierSaisi)) {
+      console.error('Erreur : Il faut saisir un nombre');
+      return this.loop();
+    }
+
+    console.log('Vous avez saisi ' + entierSaisi);
+
+    this.essais.push(entierSaisi);
+
+    if (entierSaisi < this.entierAlea) {
+      console.log('Trop petit');
+      this.loop();
+    } else if (entierSaisi > this.entierAlea) {
+      console.log('Trop grand');
+      this.loop();
+    } else {
+      console.log('Gagné');
+      this._rl.close();
+    }
+  });
+};
 
 const game = new Jeu({
-  max: 10,
+  max: 10
 });
 game.loop();
 
