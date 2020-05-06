@@ -4,8 +4,14 @@ function save(val) {
   };
 }
 
-for (var i=1; i<=5; i++) {
-  setTimeout(save(i), 0);
+// for (var i=1; i<=5; i++) {
+//   setTimeout(save(i), 0);
+// }
+
+for (let i=1; i<=5; i++) {
+  setTimeout(() => {
+    console.log(i);
+  }, 0);
 }
 
 /*

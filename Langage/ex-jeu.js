@@ -2,7 +2,7 @@
 
 const readline = require('readline');
 
-// Enoncé slide 68
+// 1 - Prévoir des valeurs par défaut pour min et max
 function genererAlea(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
@@ -10,29 +10,22 @@ function genererAlea(min, max) {
 }
 
 function dejaJoues(essais) {
-  // Optional Chaining (ES2020)
-  // if (essais?.length) {
   if (!(essais && essais.length)) {
     return;
   }
 
-  console.log('Vous avez déjà joué : ' + essais.join(' | '));
+  // 2 - Utiliser un template literal
+  console.log('Vous avez déjà joué : ' + essais.join(' | ') + '...');
 }
 
-
-
-// const rl = readline.createInterface({
-//   input: process.stdin,
-//   output: process.stdout
-// });
-// const entierAlea = genererAlea(0, 100);
-// const essais = [];
-// loop();
-
-// Exercice : Adapter le code précédent
-// avec une fonction constructeur (exemple contact)
+// 3 - Utiliser Class
 function Jeu(options) {
+  // 4 - Utiliser un param par défaut
   options = options || {};
+
+  // 5 - En s'inspirant de coords3D dans mon exemple
+  // - Destructurer l'objet
+  // - Prévoir des valeurs par défaut
   const min = options.min || 0;
   const max = options.max !== undefined ? options.max : 100;
 
@@ -47,6 +40,9 @@ function Jeu(options) {
 Jeu.prototype.loop = function () {
   dejaJoues(this.essais);
   this._rl.question('Quel est le nombre ? ', (saisie) => {
+
+    // 6 - Remplacer parseInt et isNaN par des méthodes de Number
+    // MDN Number
     const entierSaisi = parseInt(saisie);
 
     if (isNaN(entierSaisi)) {
@@ -75,15 +71,3 @@ const game = new Jeu({
   max: 10
 });
 game.loop();
-
-// il faut que toutes ces versions fonctionnent
-// new Jeu(); (min et max defaut 0 et 100)
-// new Jeu({}); (min et max defaut 0 et 100)
-// new Jeu({ min: 50 }); // entre 50 et 100 (max défaut 100)
-// new Jeu({ max: 50 }); // entre 0 et 50 (min défaut 0)
-// new Jeu({ min: 10, max: 20 }); // entre 0 et 20
-
-// Devoirs :
-// - cet exercice
-// - regarder la vidéo (au moins les 20 premières minutes)
-// In the loop https://www.youtube.com/watch?v=cCOL7MC4Pl0
