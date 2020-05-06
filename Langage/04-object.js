@@ -24,12 +24,23 @@ delete Math.sum;
 // créer l'objet directement
 const coords = {
   x: 1,
-  y: 2
+  y: 2,
 };
 console.log(typeof coords); // object
 
-// Extensibilité
-coords.z = 3;
+// Extensibilité depuis ECMAScript 1
+// coords.z = 3;
+
+// En ES5
+Object.defineProperty(coords, 'z', {
+  value: 3,
+  enumerable: false,
+})
+
+console.log(Object.keys(coords)); // ['x', 'y'];
+
+const str = JSON.stringify(coords);
+console.log(str); // {"x":1,"y":2}
 
 const MyMath = {
   sum: (a, b) => a + b
