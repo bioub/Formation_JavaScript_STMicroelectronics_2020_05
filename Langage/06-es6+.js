@@ -1,6 +1,7 @@
 'use strict';
 
 // ES6
+// es6-features.org
 
 // Slides 128 et 130
 
@@ -30,10 +31,14 @@ prenoms.push('Romain'); // n'empeche d'écrire dans le tableau
 
 // Slide 131
 const url = 'https://formation.tech/';
-const lien = '<a href="' + url + '">C\'est mon site</a>';
+const lien = '<a href="' + url + '">' 
+             + "C'est mon site" 
+             + '</a>';
 
 // En ES6 avec template literal
-const lienES6 = `<a href="${url}">C'est mon site</a>`;
+const lienES6 = `<a href="${url}">
+  C'est mon site
+</a>`;
 
 // // function declaration
 // function sum(a, b) { return a + b; }
@@ -41,7 +46,7 @@ const lienES6 = `<a href="${url}">C'est mon site</a>`;
 // // anonymous function expression
 // const sum = function(a, b) { return a + b; }
 
-// // names function expression
+// // named function expression
 // const sum = function sum(a, b) { return a + b; }
 
 // // ES6 arrow function
@@ -100,7 +105,7 @@ console.log(multiply(...nbs));
 // const clone = nbs.slice();
 
 // Avec le SPREAD operator
-const clone = [...nbs];
+const clone = [0, ...nbs, 6];
 
 const x = 1;
 
@@ -156,15 +161,20 @@ class Contact {
   hello() {
     return 'Hello ' + this.firstName;
   }
+  static getClass() {
+    return 'Contact';
+  }
 }
+
+console.log(Contact.getClass()); // 'Contact'
 
 class User extends Contact {
   constructor(firstName, username) {
     super(firstName);
     this.username = username;
   }
-  hello() {
-    return super.hello() + ', username : ' + this.username; 
+  hello() {
+    return super.hello() + ', username : ' + this.username;
   }
 }
 

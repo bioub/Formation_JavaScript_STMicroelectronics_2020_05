@@ -23,6 +23,9 @@ for (let i=1; i<=5; i++) {
 */
 
 function Contact(firstName) {
+  // Mauvaise pratique (getFirstName et setFirstName seront dupliquées)
+  // préférer la convetion this._firstName pour
+  // les propriétés privées
   this.getFirstName = function() {
     return firstName;
   }

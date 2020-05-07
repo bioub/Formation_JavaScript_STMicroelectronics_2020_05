@@ -37,7 +37,24 @@ Object.defineProperty(coords, 'z', {
   enumerable: false,
 })
 
+// On a un autre opérateur de le . pour accéder aux valeurs
+// d'un objet
+console.log(coords.x);
+console.log(coords['x']);
+const key = 'x';
+console.log(coords[key]);
+
+// On peut boucler les clés d'un objets
+for (let key in coords) {
+  const value = coords[key];
+  console.log(key, value); // x 1 puis y 2
+}
+
 console.log(Object.keys(coords)); // ['x', 'y'];
+for (const key of Object.keys(coords)) {
+  const value = coords[key];
+  console.log(key, value); // x 1 puis y 2
+}
 
 const str = JSON.stringify(coords);
 console.log(str); // {"x":1,"y":2}
