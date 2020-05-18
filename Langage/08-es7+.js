@@ -115,7 +115,7 @@ console.log([[123], ['a'], ['b', 'c']].flat(Infinity)) // [ 123, 'a', 'b', 'c' ]
 function Jeu(options) {
   // Nullish coalescing operation (affecte opérande de droite)
   // si la gauche est nullish (undefined ou null uniquement)
-  // false (undefined, null, 0, '', false)
+  // falsy (undefined, null, 0, '', false)
   // Optional Chaining
   // const min = options?.min ?? 0;
   // const max = options?.max ?? 100;
@@ -145,4 +145,4 @@ class Contact {
 
 const romain = new Contact();
 romain.hello();
-console.log(romain.firstName) // undefined
+console.log(romain.#firstName) // undefined

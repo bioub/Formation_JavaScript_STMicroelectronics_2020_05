@@ -111,7 +111,7 @@ const x = 1;
 
 // Slide 140 Shorthand property
 const coordsA = {
-  x,
+  x, // x: x
 };
 
 console.log(coordsA); // {x: 1}

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>DOM</title>
+</head>
+<body>
+  <div>Name : <input class="input" value="Jean"></div>
+  <p>Hello <span class="output"></span> !</p>
+    <script type="module">
+      const inputElt = document.querySelector('.input');
+      const spanElt = document.querySelector('.output');
+  
+      inputElt.addEventListener('input', (event) => {
+        spanElt.innerText = event.target.value;
+      });
+    </script>
+</body>
+</html>

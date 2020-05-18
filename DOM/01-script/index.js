@@ -13,6 +13,8 @@
 
 import { hello } from './hello.js';
 
+const nom = 'Bohdanowicz'; // locale au module (au fichier)
+
 console.log(hello());
 console.log(typeof prenom); // undefined
 
