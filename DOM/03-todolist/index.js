@@ -1,27 +1,53 @@
+import { addTodo } from "./todo.js";
+
 /** @type {HTMLInputElement} */
 const todoToggleCheckEl = document.querySelector('.todo-toggle-check');
 
 /** @type {HTMLInputElement} */
 const todoInputEl = document.querySelector('.todo-input');
 
-/** @type {HTMLButtonElement} */
-const todoBtnAddEl = document.querySelector('.todo-btn-add');
+/** @type {HTMLFormElement} */
+const todoFormEl = document.querySelector('.todo-form');
 
 /** @type {HTMLDivElement} */
 const todoListEl = document.querySelector('.todo-list');
 
-todoBtnAddEl.addEventListener('click', (event) => {
+// Interdit les chiffres
+todoInputEl.addEventListener('keydown', (event) => {
+  // event type KeyboardEvent
+  if (event.keyCode >= 48 && event.keyCode <= 57) {
+    event.preventDefault();
+  }
+});
+
+todoFormEl.addEventListener('submit', (event) => {
+  event.preventDefault(); // element a une action par défaut sur cet événement
   // coords du click event.clientX, event.clientY
   // event.target === todoBtnAddEl
-  const divEl = document.createElement('div');
+  const todo = {
+    id: Math.floor(Math.random() * 1000),
+    title: todoInputEl.value,
+    completed: false,
+  };
 
-  const inputEl = document.createElement('input');
-  inputEl.type = 'text';
-  inputEl.value = todoInputEl.value;
-  divEl.appendChild(inputEl);
-
-  todoListEl.appendChild(divEl);
+  addTodo(todo, todoListEl);
 });
+
+todoToggleCheckEl.addEventListener('click', () => {
+  /** @type {NodeListOf<HTMLInputElement>} */
+  const checkboxEls = todoListEl.querySelectorAll('input[type=checkbox]');
+
+  for (const checkbox of checkboxEls) {
+    checkbox.checked = todoToggleCheckEl.checked;
+  }
+});
+
+/* Exercice 4 
+Ecouter le click de todoListEl au lieu du clic du bouton moins
+et vérifier grace à la phase de target que le clic à eu
+lieu sur un bouton moins avant de supprimer
+Exemple slide 240
+*/
 
 /*
 Exercice 1 :

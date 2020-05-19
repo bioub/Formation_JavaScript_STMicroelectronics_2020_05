@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .outer {
+        width: 200px;
+        height: 200px;
+        display: flex;
+        background-color: blue;
+      }
+
+      .inner {
+        width: 50px;
+        height: 50px;
+        background-color: yellow;
+        margin: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="outer">
+      <div class="inner">A</div>
+      <div class="inner">B</div>
+    </div>
+    <script type="module">
+      const outerEl = document.querySelector('.outer');
+      const innerEl = document.querySelector('.inner');
+
+      outerEl.addEventListener('mouseover', () => {
+        console.log('mouseover');
+      });
+
+      outerEl.addEventListener('mouseenter', () => {
+        console.log('mouseenter');
+      });
+
+      outerEl.addEventListener('click', (event) => {
+        console.log('click outer');
+        console.log(event.currentTarget); // .outer
+        console.log(event.target); // feuille de l'arbre
+      });
+
+      // innerEl.addEventListener('click', () => {
+      //   console.log('click inner');
+      // });
+    </script>
+  </body>
+</html>
