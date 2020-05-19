@@ -1,4 +1,5 @@
-import { addTodo } from "./todo.js";
+import { addTodo } from './todo.js';
+import { removeElement } from './dom.js';
 
 /** @type {HTMLInputElement} */
 const todoToggleCheckEl = document.querySelector('.todo-toggle-check');
@@ -42,7 +43,17 @@ todoToggleCheckEl.addEventListener('click', () => {
   }
 });
 
-/* Exercice 4 
+todoListEl.addEventListener('click', (event) => {
+  /** @type {HTMLElement} */
+  const clickedEl = event.target;
+
+  // Ecoute dans la phase de target
+  if (clickedEl.classList.contains('todo-btn-remove')) {
+    removeElement(clickedEl.parentElement);
+  }
+});
+
+/* Exercice 4
 Ecouter le click de todoListEl au lieu du clic du bouton moins
 et vérifier grace à la phase de target que le clic à eu
 lieu sur un bouton moins avant de supprimer
@@ -60,7 +71,7 @@ Au final que chaque soit :
   <input type="text" value="Acheter du pain">
   <button class="todo-btn-remove">-</button>
 </div>
-Indice : 
+Indice :
 - innerText : HTMLElement
 - className : Element
 - HTMLInputElement

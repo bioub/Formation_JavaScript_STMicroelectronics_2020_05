@@ -29,12 +29,5 @@ export function addTodo(todo, container) {
   btnRemoveEl.className = 'todo-btn-remove';
   divEl.appendChild(btnRemoveEl);
 
-  btnRemoveEl.addEventListener('click', (event) => {
-    /** @type {HTMLButtonElement} */
-    const btn = event.target;
-    
-    removeElement(btn.parentElement);
-  });
-
   container.appendChild(divEl);
 }
