@@ -1,5 +1,6 @@
 import { addTodo } from './todo.js';
 import { removeElement } from './dom.js';
+import { fetchTodos } from './api.js';
 
 /** @type {HTMLInputElement} */
 const todoToggleCheckEl = document.querySelector('.todo-toggle-check');
@@ -50,6 +51,13 @@ todoListEl.addEventListener('click', (event) => {
   // Ecoute dans la phase de target
   if (clickedEl.classList.contains('todo-btn-remove')) {
     removeElement(clickedEl.parentElement);
+  }
+});
+
+// Au chargement on envoie une requete pour récupérer les données
+fetchTodos().then((todos) => {
+  for (const todo of todos) {
+    addTodo(todo, todoListEl);
   }
 });
 
