@@ -31,21 +31,23 @@
 
       outerEl.addEventListener('mouseover', () => {
         console.log('mouseover');
+        // -> mouseout en sortie
       });
 
       outerEl.addEventListener('mouseenter', () => {
         console.log('mouseenter');
+        // -> mouseleave en sortie
       });
 
       outerEl.addEventListener('click', (event) => {
         console.log('click outer');
-        console.log(event.currentTarget); // .outer
+        console.log(event.currentTarget === outerEl); // true
         console.log(event.target); // feuille de l'arbre
       });
 
-      // innerEl.addEventListener('click', () => {
-      //   console.log('click inner');
-      // });
+      innerEl.addEventListener('click', () => {
+        console.log('click inner');
+      });
     </script>
   </body>
 </html>

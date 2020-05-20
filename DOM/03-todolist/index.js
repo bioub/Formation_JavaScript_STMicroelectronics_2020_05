@@ -1,6 +1,6 @@
 import { addTodo } from './todo.js';
 import { removeElement } from './dom.js';
-import { fetchTodos } from './api.js';
+import { fetchTodos, postTodo, deleteTodo } from './api.js';
 
 /** @type {HTMLInputElement} */
 const todoToggleCheckEl = document.querySelector('.todo-toggle-check');
@@ -14,8 +14,23 @@ const todoFormEl = document.querySelector('.todo-form');
 /** @type {HTMLDivElement} */
 const todoListEl = document.querySelector('.todo-list');
 
+
+
 // Interdit les chiffres
 todoInputEl.addEventListener('keydown', (event) => {
+  // Manipuler le CSS et modifier aléatoire la couleur de fond
+  const r = Math.floor(Math.random() * 256);
+  const g = Math.floor(Math.random() * 256);
+  const b = Math.floor(Math.random() * 256);
+  todoInputEl.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+
+  // Exercice 1 (ex slide 264)
+  // Stocker dans le localStorage le contenu du champs (à la clé "saisie")
+  // à la frappe clavier (ici)
+
+  // Exercice 2 (ex slide 264)
+  // Au chargement de la page remplir le champs avec le contenu du storage
+
   // event type KeyboardEvent
   if (event.keyCode >= 48 && event.keyCode <= 57) {
     event.preventDefault();
@@ -27,12 +42,17 @@ todoFormEl.addEventListener('submit', (event) => {
   // coords du click event.clientX, event.clientY
   // event.target === todoBtnAddEl
   const todo = {
-    id: Math.floor(Math.random() * 1000),
+    // id: Math.floor(Math.random() * 1000),
     title: todoInputEl.value,
     completed: false,
   };
 
-  addTodo(todo, todoListEl);
+  // démarrer un loader 
+  postTodo(todo).then((todoFromApi) => {
+    // arrêter un loader 
+    console.log(todoFromApi);
+    addTodo(todoFromApi, todoListEl);
+  })
 });
 
 todoToggleCheckEl.addEventListener('click', () => {
@@ -50,7 +70,18 @@ todoListEl.addEventListener('click', (event) => {
 
   // Ecoute dans la phase de target
   if (clickedEl.classList.contains('todo-btn-remove')) {
-    removeElement(clickedEl.parentElement);
+    const id = clickedEl.parentElement.dataset.todoId;
+
+    // Disable le bouton pour ne pas qu'on clique 2 fois
+    clickedEl.disabled = true;
+
+    // Manipuler le CSS pour griser la ligne en cours de suppression
+    clickedEl.parentElement.classList.add('pending-delete');
+    // clickedEl.parentElement.style.opacity = '0.5';
+
+    deleteTodo(id).then(() => {
+      removeElement(clickedEl.parentElement);
+    });
   }
 });
 
